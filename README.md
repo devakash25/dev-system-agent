@@ -22,7 +22,11 @@ This agent was stress-tested using the `adk eval` suite with the following resul
 * **Model:** Gemini 2.5 Flash
 * **Infrastructure:** Google Cloud Shell / Streamlit Cloud
 
-## 🚀 How to Run
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/devakash25/dev-system-agent.git](https://github.com/devakash25/dev-system-agent.git)
+
+graph TD
+    User((User)) -->|Query| Specialist[Specialist Agent]
+    Specialist -->|Calls Tool| OS[Python: get_system_status]
+    OS -->|Raw Data| Specialist
+    Specialist -->|Draft Response| Critic[Critic Agent]
+    Critic -->|Verifies Data| Final{Final Output}
+    Final -->|Success| Out[DEV-VERIFIED Response]
